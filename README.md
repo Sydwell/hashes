@@ -1,5 +1,5 @@
-##Hashes for Cashers
-#Demonstrating the Power of Bitcoin Cash Smart Contracts and Cash Tokens!
+# Hashes for Cashers
+## Demonstrating the Power of Bitcoin Cash Smart Contracts and Cash Tokens!
 This page is built to test my and hopefully your understanding of Bitcoin Cash Tokens and Smart Contracts
 
 What we have here is a simple guessing game. This `Hashes for Cashes` contract has chosen a number between 1 and 21 inclusively. It is your task to try and guess the right number or use your knowledge of Bitcoin Cash smart contracts to try and crack the contract.
