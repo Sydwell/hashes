@@ -1,0 +1,65 @@
+{
+  "contractName": "H4C_alpha_v10",
+  "constructorInputs": [
+    {
+      "name": "master",
+      "type": "pubkey"
+    },
+    {
+      "name": "costInSats",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "checkAll",
+      "inputs": [
+        {
+          "name": "playerPub",
+          "type": "pubkey"
+        },
+        {
+          "name": "playerSig",
+          "type": "sig"
+        },
+        {
+          "name": "playerDataSig",
+          "type": "datasig"
+        }
+      ]
+    },
+    {
+      "name": "checkWin",
+      "inputs": [
+        {
+          "name": "playerPub",
+          "type": "pubkey"
+        },
+        {
+          "name": "playerSig",
+          "type": "sig"
+        },
+        {
+          "name": "playerDataSig",
+          "type": "datasig"
+        }
+      ]
+    },
+    {
+      "name": "collection",
+      "inputs": [
+        {
+          "name": "masterSig",
+          "type": "sig"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_2 OP_PICK OP_0 OP_NUMEQUAL OP_IF b7f93ab85deb364d35f66d8bcf2041c9698aa5ef2144a269f61b6e64d64d9f2a OP_0 OP_UTXOTOKENCATEGORY 20 OP_SPLIT OP_DROP OP_EQUALVERIFY 6290aab91100476a174817a07a80593e9102213cdf72097a6e2db30e70f1962d OP_1 OP_UTXOTOKENCATEGORY 20 OP_SPLIT OP_DROP OP_EQUALVERIFY OP_0 OP_OUTPUTBYTECODE OP_0 OP_UTXOBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_1 OP_UTXOBYTECODE OP_EQUALVERIFY OP_1 OP_UTXOTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_0 OP_UTXOTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_1 OP_OUTPUTTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_13 OP_PICK OP_4 OP_SPLIT OP_DROP OP_DUP OP_5 OP_ROLL OP_EQUALVERIFY OP_6 OP_ROLL f66d8bcf OP_CAT OP_7 OP_PICK OP_CAT OP_7 OP_PICK OP_CAT 2041c96908 OP_CAT OP_SHA256 OP_4 OP_SPLIT OP_DROP OP_BIN2NUM 14 OP_MOD OP_1ADD OP_9 OP_ROLL 1027 OP_DIV OP_4 OP_NUM2BIN OP_7 OP_ROLL OP_EQUALVERIFY OP_5 OP_PICK OP_7 OP_PICK OP_EQUALVERIFY OP_6 OP_ROLL OP_BIN2NUM OP_1ADD OP_4 OP_NUM2BIN OP_5 OP_ROLL OP_EQUALVERIFY OP_3 OP_ROLL OP_ROT OP_EQUALVERIFY OP_SWAP OP_ROT OP_CAT OP_6 OP_ROLL OP_SWAP OP_5 OP_PICK OP_CHECKDATASIGVERIFY 16 OP_NUMNOTEQUAL OP_VERIFY OP_2SWAP OP_CHECKSIG OP_NIP OP_NIP OP_ELSE OP_2 OP_PICK OP_1 OP_NUMEQUAL OP_IF b7f93ab85deb364d35f66d8bcf2041c9698aa5ef2144a269f61b6e64d64d9f2a OP_0 OP_UTXOTOKENCATEGORY 20 OP_SPLIT OP_DROP OP_EQUALVERIFY 6290aab91100476a174817a07a80593e9102213cdf72097a6e2db30e70f1962d OP_1 OP_UTXOTOKENCATEGORY 20 OP_SPLIT OP_DROP OP_EQUALVERIFY OP_0 OP_OUTPUTBYTECODE OP_0 OP_UTXOBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_1 OP_UTXOBYTECODE OP_EQUALVERIFY OP_1 OP_UTXOTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_0 OP_UTXOTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_1 OP_OUTPUTTOKENCOMMITMENT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_4 OP_SPLIT OP_DROP OP_13 OP_PICK OP_4 OP_SPLIT OP_DROP OP_DUP OP_5 OP_ROLL OP_EQUALVERIFY OP_6 OP_ROLL f66d8bcf OP_CAT OP_7 OP_PICK OP_CAT OP_7 OP_PICK OP_CAT 2041c96908 OP_CAT OP_SHA256 OP_4 OP_SPLIT OP_DROP OP_BIN2NUM 14 OP_MOD OP_1ADD OP_9 OP_ROLL 1027 OP_DIV OP_4 OP_NUM2BIN OP_7 OP_ROLL OP_EQUALVERIFY OP_5 OP_PICK OP_7 OP_PICK OP_EQUALVERIFY OP_6 OP_ROLL OP_BIN2NUM OP_1ADD OP_4 OP_NUM2BIN OP_5 OP_ROLL OP_EQUALVERIFY OP_3 OP_ROLL OP_ROT OP_EQUALVERIFY OP_OVER OP_3 OP_ROLL OP_CAT OP_7 OP_ROLL OP_SWAP OP_6 OP_PICK OP_CHECKDATASIGVERIFY OP_SWAP OP_BIN2NUM OP_NUMEQUALVERIFY OP_2SWAP OP_CHECKSIG OP_NIP OP_NIP OP_ELSE OP_ROT OP_2 OP_NUMEQUALVERIFY OP_ROT OP_SWAP OP_CHECKSIG OP_NIP OP_ENDIF OP_ENDIF",
+  "source": "pragma cashscript ^0.8.0;\n// Contract Address - bitcoincash:rdmku7w50upr80s9pxn4nlwsqpr35j4nkk6yajh0l6awfasamrpjgpsp0grfg\n// cashc -o h4c-alpha-v10.json h4c-alpha-v10.cash\n\n// Masterpubkey: 021b0773eb7ceeaad890ec8c384071338bffda9d392c671cc41128587ff8b04867\n// 10000n = 0.0001BCH was costInSats: 300000n = 0.003BCH\n// amountOfTokensToReceive: 300n\n// sydcoin: c18076a677350393ba16baefed662fafbf99371d4de111123f30ea517044a1a6\n// paymentCategory = \"2a9f4dd6646e1bf669a24421efa58a69c94120cf8b6df6354d36eb5db83af9b7\"\n// paymentCategory_rev b7f93ab85deb364d35f66d8bcf2041c9698aa5ef2144a269f61b6e64d64d9f2a\n//unreversed a6a1447051ea303f1211e14d1d3799bfaf2f66edefba16ba93033577a67680c1\n// controlCategory  = 2d96f1700eb32d6e7a0972df3c2102913e59807aa01748176a470011b9aa9062;\n// controlCategory_rev  = 6290aab91100476a174817a07a80593e9102213cdf72097a6e2db30e70f1962d\n\n// collection cashonize address: bitcoincash:zra9c3l9k03ze9l9u985u76y30tq0n9fmv4pdss438\n\n/**\n<payment token> = <amount paid><round><partSig of guess><ident>\nhash of guess is guess number and round number \n<control token> = <round><winHash><winning number> and  <winning ident>\nwinHash input is used to calculate winner!\nwinHash output is set to part of the signedData!\nwinning number in is not used\nwinning number out is same as user supplied guess\nall idents are not checked\n\n\n**/\n\ncontract H4C_alpha_v10(pubkey master, int costInSats) { \n\n\n    /**\n        The complete contract, used to spend incorrect guess!\n    */ \n    function checkAll(pubkey playerPub, sig playerSig, datasig playerDataSig)  {\n        /* Do we have the correct payment category? */\n        bytes32 paymentCategory_rev  = 0xb7f93ab85deb364d35f66d8bcf2041c9698aa5ef2144a269f61b6e64d64d9f2a;\n        bytes paymentCategory_sp = tx.inputs[0].tokenCategory.split(32)[0];\n        require(paymentCategory_rev == paymentCategory_sp);\n\n        /* Do we have the correct payment category? */\n        bytes32 ControlCategory_rev  = 0x6290aab91100476a174817a07a80593e9102213cdf72097a6e2db30e70f1962d;\n        bytes ControlCategory_sp = tx.inputs[1].tokenCategory.split(32)[0];\n        require(ControlCategory_rev == ControlCategory_sp);\n         /** Is payment token sent to the correct address? can we send it back to contact address \n            so that leader table can be maintained? */\n        require(tx.outputs[0].lockingBytecode == tx.inputs[0].lockingBytecode);\n        /** Is control token sent back? */\n        require(tx.outputs[1].lockingBytecode == tx.inputs[1].lockingBytecode);\n\n        /** \n        * Get all the variables from commitments\n        */\n        bytes controlInData = tx.inputs[1].nftCommitment;\n        bytes roundInBytes, bytes controlInOther1 = controlInData.split(4);\n        bytes winHashIn = controlInOther1.split(4)[0]; \n        // bytes winHashIn, bytes controlInOther2 = controlInOther1.split(4);\n        // bytes oldWinningNumber = controlInOther2.split(4)[0]; // not used\n\n        bytes paidCommitmentData = tx.inputs[0].nftCommitment;\n        bytes paidInBytes, bytes payCheck2 = paidCommitmentData.split(4);\n        bytes payCheckRound, bytes payCheck3 = payCheck2.split(4);\n        bytes payPartSig = payCheck3.split(4)[0];\n\n        bytes controlOutData = tx.outputs[1].nftCommitment;\n        bytes realRoundOut, bytes outCheck1 = controlOutData.split(4);   \n        bytes winHashOut, bytes outCheck2 = outCheck1.split(4);\n        bytes winningNumberInBytes = outCheck2.split(4)[0]; // The 2nd index is ident, which is not used\n\n        /**\n        * First 4 bytes of data signature, used for new hash and check that the same signature supply as \n        * when payment was made! \n        */\n        bytes partSigBytes = bytes(playerDataSig).split(4)[0];\n        require(partSigBytes == payPartSig);\n\n        /**\n        * Calculates the correct winning number!\n        */\n        bytes calcHash = sha256(winHashIn + 0xf66d8bcf + roundInBytes + roundInBytes + 0x2041c9698).split(4)[0];\n        int theCorrectGuess = (int(calcHash)%20)+1;\n\n        /**\n        * Is correct price data supplied?\n        */\n        bytes4 costInBytes = bytes4(costInSats/10000);\n        require(paidInBytes == costInBytes);\n\n        /**\n        * Is correct round specified? \n        */\n        require(payCheckRound == roundInBytes);\n\n        /**\n        * Is round incremented correctly? \n        */\n        int roundInInt = int(roundInBytes) + 1;\n        bytes4 roundOutBytes = bytes4(roundInInt);\n        require(realRoundOut == roundOutBytes);\n\n        /**\n        * Is new hash correctly set?\n        */\n        require(winHashOut == partSigBytes);\n\n       // require(partSigBytes == payHashGuess);\n       // require(winningHash != 0x00001000); // dummy test\n\n        /**\n        * Is the signed data correct?\n        */\n        bytes signedData =  winningNumberInBytes + payCheckRound ;\n        require(checkDataSig(playerDataSig, signedData, playerPub));\n\n        /**\n        * Has the player supplied the winning number \n        */\n        //require(int(winningNumberInBytes) == theCorrectGuess);\n        require(22 != theCorrectGuess); //dummy\n\n        /**\n        * Correct user private key supplied\n        */ \n        require(checkSig(playerSig, playerPub));\n    }\n\n    /**\n        The complete contract, excluding payment check! \n    */ \n    function checkWin(pubkey playerPub, sig playerSig, datasig playerDataSig)  {\n        /* Do we have the correct payment category? */\n        bytes32 paymentCategory_rev  = 0xb7f93ab85deb364d35f66d8bcf2041c9698aa5ef2144a269f61b6e64d64d9f2a;\n        bytes paymentCategory_sp = tx.inputs[0].tokenCategory.split(32)[0];\n        require(paymentCategory_rev == paymentCategory_sp);\n\n        /* Do we have the correct payment category? */\n        bytes32 ControlCategory_rev  = 0x6290aab91100476a174817a07a80593e9102213cdf72097a6e2db30e70f1962d;\n        bytes ControlCategory_sp = tx.inputs[1].tokenCategory.split(32)[0];\n        require(ControlCategory_rev == ControlCategory_sp);\n         /** Is payment token sent to the correct address? can we send it back to contact address \n            so that leader table can be maintained? */\n        require(tx.outputs[0].lockingBytecode == tx.inputs[0].lockingBytecode);\n        /** Is control token sent back? */\n        require(tx.outputs[1].lockingBytecode == tx.inputs[1].lockingBytecode);\n\n        /** \n        * Get all the variables from commitments\n        */\n        bytes controlInData = tx.inputs[1].nftCommitment;\n        bytes roundInBytes, bytes controlInOther1 = controlInData.split(4);\n        bytes winHashIn = controlInOther1.split(4)[0]; \n        // bytes winHashIn, bytes controlInOther2 = controlInOther1.split(4);\n        // bytes oldWinningNumber = controlInOther2.split(4)[0]; // not used\n\n        bytes paidCommitmentData = tx.inputs[0].nftCommitment;\n        bytes paidInBytes, bytes payCheck2 = paidCommitmentData.split(4);\n        bytes payCheckRound, bytes payCheck3 = payCheck2.split(4);\n        bytes payPartSig = payCheck3.split(4)[0];\n\n        bytes controlOutData = tx.outputs[1].nftCommitment;\n        bytes realRoundOut, bytes outCheck1 = controlOutData.split(4);   \n        bytes winHashOut, bytes outCheck2 = outCheck1.split(4);\n        bytes winningNumberInBytes = outCheck2.split(4)[0]; // The 2nd index is ident, which is not used\n\n        /**\n        * First 4 bytes of data signature, used for new hash and check that the same signature supply as \n        * when payment was made! \n        */\n        bytes partSigBytes = bytes(playerDataSig).split(4)[0];\n        require(partSigBytes == payPartSig);\n\n        /**\n        * Calculates the correct winning number!\n        */\n        bytes calcHash = sha256(winHashIn + 0xf66d8bcf + roundInBytes + roundInBytes + 0x2041c9698).split(4)[0];\n        int theCorrectGuess = (int(calcHash)%20)+1;\n\n        /**\n        * Is correct price data supplied?\n        */\n        bytes4 costInBytes = bytes4(costInSats/10000);\n        require(paidInBytes == costInBytes);\n\n        /**\n        * Is correct round specified? \n        */\n        require(payCheckRound == roundInBytes);\n\n        /**\n        * Is round incremented correctly? \n        */\n        int roundInInt = int(roundInBytes) + 1;\n        bytes4 roundOutBytes = bytes4(roundInInt);\n        require(realRoundOut == roundOutBytes);\n\n        /**\n        * Is new hash correctly set?\n        */\n        require(winHashOut == partSigBytes);\n\n       // require(partSigBytes == payHashGuess);\n       // require(winningHash != 0x00001000); // dummy test\n\n        /**\n        * Is the signed data correct?\n        */\n        bytes signedData =  winningNumberInBytes + payCheckRound ;\n        require(checkDataSig(playerDataSig, signedData, playerPub));\n\n        /**\n        * Has the player supplied the winning number \n        */\n        require(int(winningNumberInBytes) == theCorrectGuess);\n       // require(22 != theCorrectGuess); //dummy\n\n        /**\n        * Correct user private key supplied\n        */ \n        require(checkSig(playerSig, playerPub));\n    }\n\n    function collection(sig masterSig) {\n       require(checkSig(masterSig, master));\n   }\n}\n\n",
+  "compiler": {
+    "name": "cashc",
+    "version": "0.8.0"
+  },
+  "updatedAt": "2023-07-17T09:54:33.472Z"
+}

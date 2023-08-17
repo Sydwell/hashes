@@ -1,0 +1,53 @@
+body {
+    background-color: rgb(216, 209, 147);
+}
+
+
+.bquest-main {
+    background-color: rgb(247, 241, 194);
+    height: 100%;
+}
+
+/* .fixWidth {
+    width: 1900px;
+} */
+
+.div-qr {
+    /* background-color: brown; */
+    float: right;
+}
+
+.icon-sizing {
+    font-size: xx-large;
+}
+
+.color-r {
+    background-color: brown;
+    /* display: block; */
+    width: 40%;
+}
+.color-b {
+    background-color: rgb(69, 80, 247);
+    /* display: block; */
+    width: 40%;
+}
+pre {
+    background: #eee;
+    padding: 1rem;
+    overflow: auto;
+    border-radius: 3px;
+    max-width: 120ch;
+  }
+  
+  pre code {
+      text-align: left;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      word-wrap: normal;
+      line-height: 1.5;
+  }
+
+  .door {
+    margin: 10px;
+  }
