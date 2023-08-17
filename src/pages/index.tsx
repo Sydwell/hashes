@@ -65,7 +65,7 @@ export default function Home() {
           }
           return newRound
         })
-        console.log('Prize set at', sat2win / 100_000_000, `newRound ${newRound} `)
+       // console.log('Prize set at', sat2win / 100_000_000, `newRound ${newRound} `)
       }
 
     })();
@@ -143,7 +143,7 @@ export default function Home() {
    */
   async function handleGuessSubmit(): Promise<void> {
 
-    if (currentDoor < 1) { // A valid door must be sellected
+    if (currentDoor < 1) { // A valid door must be selected
       const newState = { ...doorStates }
       newState[1] = closeState
       newState[2] = closeState
@@ -172,23 +172,20 @@ export default function Home() {
     let [ord, fullSig] = await opReturnConstruction(submittingValue, playerPrivateKey)
 
     let sr: SendRequest = { cashaddr: getContractAddress(), value: minBCHtoPlay, unit: 'bch' }
-    console.log('/*** handleGuessSubmit() opReturnConstruction done ***/', `OpR Data ${ord.buffer} ${fullSig}`, fullSig)
     let tx = await GlobalWallet.send([sr, ord]);
-    console.log('tx id', tx.txId)
 
     setTimeout(async () => {
       let guessResult = await contractExecution(submittingValue, playerPrivateKey, fullSig, tx.txId as string)
-      console.log('/*** handleGuessSubmit() contractExecution done ***/', `actualGuess  ${guessResult}`)
       if (guessResult) {
         const newState = { ...doorStates }
-        newState[currentDoor] = winState
+        newState[submittingValue] = winState
         setDoorsStates(newState)
         console.log(`MAKE A Noise `)
         setSubmitText('Click to start next round!')
         areWeBusy = false
       } else {
         const newState = { ...doorStates }
-        newState[currentDoor] = goatState
+        newState[submittingValue] = goatState
         setDoorsStates(newState)
         setSubmitText('Select a Door to Open!')
         areWeBusy = false

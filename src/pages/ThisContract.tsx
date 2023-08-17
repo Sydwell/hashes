@@ -152,7 +152,7 @@ contract H4C_beta_v3(pubkey master, int satsPerRep) {
         /**
          * Calculates the correct winning number!
          */
-        bytes calcHash = sha256(winHashIn + 0xf66d8bcf + roundInBytes + roundInBytes + 0x2041c9698);
+        bytes calcHash = <SECRET SAUCE>;
         calcHash = calcHash.split(2)[0];
         // The ending zeros to ensure we have a positive number 
         int theCorrectGuess = int ( calcHash + 0x00 );
