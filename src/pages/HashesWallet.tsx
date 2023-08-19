@@ -1,6 +1,6 @@
 
 import { ImageI, qrAddress, Wallet, binToHex } from 'mainnet-js'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { CancelWatchFn } from 'mainnet-js/dist/module/wallet/interface';
 import { minBCHtoPlay } from './api/contract_execution';
@@ -35,7 +35,6 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
     async function onActionWithdraw() {
         let withdrawAddress = (withdrawRef.current as HTMLInputElement).value;
         let result = await (wallet as Wallet).sendMax(withdrawAddress)
-        console.log('withdrawAddress result', result)
     }
 
      /**
@@ -45,7 +44,6 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
         var copyText = document.getElementById("myInput")
         setToast(true)
         doReveal(false)
-        // console.log(`User guess is ${userGuess()} `);
         navigator.clipboard.writeText(wallet?.getTokenDepositAddress() as string)
         setTimeout(() => {
             setToast(false);
@@ -72,33 +70,27 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
         let localAddress = thisWallet.getDepositAddress()
         thisWallet.getLastTransaction
         const decoded = await Wallet.util.decodeTransaction(txHash, true);
-        console.log(decoded)
         /** @TODO how do we handle multiple addresses? */
         let incomingAddress = decoded.vin[0].address + "";
         /* Sum up the output to our address to see exactly how much we are receiving */
         let total = decoded.vout.filter(thisOnly => thisOnly.scriptPubKey.addresses[0] == localAddress).reduce((sum, vo) => sum + vo.value, 0)
         let unitsReceived = Math.ceil((total * 100_000_000) / 10000)
         let repSats = (parseInt(unitsReceived.toString()) + "").padStart(5, '0')
-        console.log(`total sats ${total * 100_000_000} unitsReceived ${unitsReceived} repSats ${repSats} `);
     }
 
     /**
      * Only for wallet instantiation, node because of react strict mode and being a developer mode, instantiation might still be called twice! 
      */
     useEffect(() => {
-        if (onceOnly) {
-            console.log("*** startUp ****")
+     //   if (onceOnly) {
             Wallet.namedExists("pWallet").then((exists) => {
-                console.log(`pWallet exists? ${exists}`)
                 if (exists) {
-                    console.log("The pWallet does exist");
                     Wallet.named(`pWallet`).then((pWallet) => {
                         GlobalWallet = pWallet
                         setWallet(pWallet)
                         onceOnly = false
                     })
                 } else {
-                    console.log("The pWallet does NOT exist, We creating it now!")
                     Wallet.newRandom(`pWallet`).then((pWallet) => {
                         GlobalWallet = pWallet
                         setWallet(pWallet)
@@ -106,7 +98,7 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
                     })
                 }
             })
-        }
+     //   }
     }, [])
 
 
@@ -119,12 +111,9 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
             if (wallet != undefined) {
                 closeFunction = await wallet.watchAddress(txHash => incoming(txHash, wallet))
                 // GlobalWallet = wallet
-                console.log(`Using pWallet ${wallet.privateKeyWif}`)
                 let wP = wallet?.privateKey as Uint8Array
-                console.log(`Using pWallet ${binToHex(wP)}`)
                 setImage(qrAddress(`${wallet.getTokenDepositAddress()}?amount=0.003`))
                 let bal = (await wallet.getBalance("bch")) as number
-                console.log(bal)
                 if (bal > minBCHtoPlay) {
                     onChangeEnough(true);
                     (balanceRef.current as HTMLInputElement).value = "" + bal
@@ -132,14 +121,13 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
                     onChangeEnough(false);
                 }
             }
-            console.log(`useEffect bal.bch ${balanceRef.current} `);
         })()
         return(() => {
             if (closeFunction != null) {
                 closeFunction()
             }
         })
-    }, [onChangeEnough])
+    }, [onChangeEnough, wallet])
 
     return (
         <>
@@ -154,11 +142,11 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
                     height={256}
                     priority
                 />}
-                <span className="icon-sizing" title="Copy the Token Address to the Clipboard!" onClick={copyAddressToClipboard}>📋</span>
+                <span className="icon-sizing d-none d-sm-none d-md-inline" title="Copy the Token Address to the Clipboard!" onClick={copyAddressToClipboard}>📋</span>
                 {wallet && <div className="{styles.center}">
-                    <div className="lead">
+                    <div className="lead" style={{wordBreak: "break-all"}}>
                         <p>
-                            <code><small>{wallet?.getTokenDepositAddress()}</small></code>
+                            <code><small onClick={copyAddressToClipboard}>{wallet?.getTokenDepositAddress()}</small></code>
                         </p>
                     </div>
 
@@ -192,6 +180,7 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
     )
 }
 
-export default HashesWallet
+export default memo(HashesWallet)
+
 
 

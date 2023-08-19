@@ -57,11 +57,9 @@ export async function opReturnConstruction(numberGuessed: number, playerPrivByte
         let partSig = binToHex(fullSig).substring(0, 8)
         let hashedHex = binToHex(hashed)
         let guessValueInSats = minBCHtoPlay * 100_000_000
-        console.log(`to sha256 ${guessHexLE + gameIndexHex} partSig ${partSig} hashedHex ${hashedHex}`)
         // let sr: SendRequest = { cashaddr: payTokenAddress, value: guessValueInSats, unit: 'sats' }
         let sr: SendRequest = { cashaddr: contract.tokenAddress, value: guessValueInSats, unit: 'sats' }
         let ord = { buffer: Buffer.from('42513031' + gameIndexHex + partSig + playerIdentifier, 'hex') }
-       // console.log(`tsr tsr sr ${sr} ${ord}`)
         return [ord, binToHex(fullSig)]
     } else {
         throw "Unable construct the Op-Return data."
@@ -82,7 +80,6 @@ export async function getCurrentRound(): Promise<number> {
     if (controlUtxo != undefined) {
         let gameIndexHex = controlUtxo?.token?.nft?.commitment.substr(0, 8) as string
         let gameIndex = parseInt(swapEndianness(gameIndexHex), 16)
-        console.log(`Contract Address ${contract.tokenAddress} current Round ${gameIndex} `)
         return gameIndex
     } else {
         throw "Unable get op_return data"
@@ -142,8 +139,6 @@ async function calcRecover(contract: Contract, sat2win: number, collect: boolean
     } 
     let noOfUtxos = (await contract.getUtxos()).length
     let contractBalance = await contract.getBalance()
-    
-    console.log("calcRecover typical Input", typicalInput, 'sat2win', sat2win)
     let typicalTxSats = Math.floor(((typicalInput * noOfUtxos) + outputSizes) ) 
     let sats2Recover = contractBalance - (BigInt(typicalTxSats + sat2win) )
     return sats2Recover 
@@ -171,10 +166,7 @@ async function getPaymentUtxo(paymentTxId: string, contractAddress: string): Pro
     const decodedTx = await Wallet.util.decodeTransaction(paymentTxId, true);
     for await (let vo of decodedTx.vout) {
         if (vo.scriptPubKey.addresses[0] == contractAddress) {
-            console.log('find', vo.scriptPubKey.hex, vo.n, vo.scriptPubKey, vo.tokenData, vo.value)
             return { satoshis: BigInt(vo.value * 100_000_000), vout: vo.n, token: vo.tokenData, txid: paymentTxId } as Utxo
-        } else {
-            console.log('wrong', vo.scriptPubKey.hex, vo.scriptPubKey.hex.length, vo)
         }
     }
     return null
@@ -212,15 +204,9 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
     const controlUtxo = await getControlUtxo(contractUtxos)
     /** CONTROL */
     if (controlUtxo != null) {
-        console.log(`controlUtxo `)
-        console.log(controlUtxo)
         controlSayGameIndexIs = controlUtxo.token?.nft?.commitment.substr(0, 8) as string // 1st Four bytes LE for the game number 2nd 4-bytes is the seed
         // gameIndex = parseInt(swapEndianness(gameIndexStr), 16); //  The true game index
-
-        console.log(`controlToken will process UTXO' with this ${controlSayGameIndexIs} game index and a partSig of ${partSig}.`)
-        console.log(controlToken)
     } else {
-        console.log(`No controlUtxo `)
         return false
     }
     //if (playerIdentifier != 'C011EC') {
@@ -232,7 +218,6 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
     // Why does this not work? > let playerIdentifier = raw.substring((opIndex*2) + 24, 40 );
     playerIdentifier = raw.substring((opIndex * 2) + 24);
     playerIdentifier = playerIdentifier.substring(0, 40)
-    console.log(`Player ${binToHex(playerPkh)}  ${playerTokenAddress} playerIdentifier ${playerIdentifier} raw len ${raw.length} ${playerIdentifier.length} opIndex ${opIndex} len ${('42513031' + controlSayGameIndexIs + partSig).length} `)
     paymentUtxo = await getPaymentUtxo(paymentTxId, contract.address) as Utxo
    // } 
 
@@ -245,9 +230,7 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
     let gameIndex_hex = swapEndianness(newGameIndex.toString(16).padStart(8, '0'))
     // winningAmount = BigInt(parseInt(swapEndianness(potentialPlayerCommitment.substr(24, 8)), 16) * 10000)
 
-    console.log(`gameIndex ${gameIndex} ${newGameIndex} newGameIndex in hex ${gameIndex_hex} playerIdentifier ${playerIdentifier}`)
     let newCommitment = gameIndex_hex + partSig + hexNumberS + playerIdentifier
-    console.log(`new commitment ${newCommitment} length ${newCommitment.length} `)
     controlToken = {
         amount: 0n,
         category: controlCategory,
@@ -256,10 +239,7 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
             commitment: newCommitment
         }
     }
-    /**  Payments can be null if collecting */
-    if (playerIdentifier == 'C011EC' && paymentUtxo == null) {
-        console.log(`collect only `)
-    }
+   
 
     /**  
      * This is the utxo we use to collect value, Need to make sure balance doesn't fall below this value! 
@@ -295,7 +275,6 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
      */
     try {
         let recoveredSats = await calcRecover(contract, sat2win, false)
-        console.log('fullSig', fullSig, "recoveredSats", recoveredSats, controlUtxo.token?.nft?.commitment, `controlToken`, controlToken.nft.commitment)
         txDetails = await contract.functions
             .checkWin(playerPub, playerSig, hexToBin(fullSig), raw, BigInt(opIndex))
             .from(controlUtxo)
@@ -308,16 +287,13 @@ export async function contractExecution(numberGuessed: number, playerPrivBytes: 
             .withoutChange()
            // .meep()
             .send()
-        console.log(`txDetails `, txDetails);
     } catch (txError) {
-        console.log(`Probs wrong guess `, txError);
+        console.log(`Probs wrong guess `);
 
     }
     // */
 
     if (typeof txDetails == "object") {
-        // @ts-ignore
-        console.log('txDetails id', txDetails.txid);
         return true
     }
     return false
