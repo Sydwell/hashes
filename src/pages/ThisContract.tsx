@@ -205,7 +205,7 @@ contract H4C_beta_v3(pubkey master, int satsPerRep) {
                     <li>Player signed Guess and Round number</li>
                     <li>Player Identity</li>
                 </ul>
-                This payment transaction consists of the payment UTXO as well as the unspendable OP-Return UTXO.
+                This incoming payment transaction consists of the payment UTXO as well as the unspendable OP-Return UTXO.
                 </p>
             <h3>Winning Contract Claim?</h3>
             <p>    
@@ -221,6 +221,7 @@ contract H4C_beta_v3(pubkey master, int satsPerRep) {
             </p>
             <p>The built-in Bitcoin Cash wallet uses MainNet_js library and using lots on ideas from the Cashonize wallet.</p>
             <p>For debugging the contract and code a special thank you to M. G.</p>
+            <p><a href="https://github.com/Sydwell/hashes" target="_blank">The source code can be reviewed on github.</a></p>
             <p>To hack this contract you need to figure out what the &lt;SECRET SAUCE&gt; is, Maybe there are another ways 🤔</p>
             <pre>
                 <code>{obj}</code>

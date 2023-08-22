@@ -10,7 +10,6 @@ export interface Props {
 }
 
 export let GlobalWallet: Wallet
-let onceOnly = true // Only for wallet instantiation, node because of react strict mode and being a developer mode, instantiation might still be called twice! 
 
 function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
     const [wallet, setWallet] = useState<Wallet>();
@@ -82,19 +81,16 @@ function HashesWallet({ onEnoughChange: onChangeEnough }: Props) {
      * Only for wallet instantiation, node because of react strict mode and being a developer mode, instantiation might still be called twice! 
      */
     useEffect(() => {
-     //   if (onceOnly) {
             Wallet.namedExists("pWallet").then((exists) => {
                 if (exists) {
                     Wallet.named(`pWallet`).then((pWallet) => {
                         GlobalWallet = pWallet
                         setWallet(pWallet)
-                        onceOnly = false
                     })
                 } else {
                     Wallet.newRandom(`pWallet`).then((pWallet) => {
                         GlobalWallet = pWallet
                         setWallet(pWallet)
-                        onceOnly = false
                     })
                 }
             })
