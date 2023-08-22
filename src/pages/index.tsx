@@ -28,8 +28,8 @@ export default function Home() {
   const memoizedCallBack = useCallback((enough: boolean) => handleEnoughToggleChange(enough), [])
   const [showBurger, setShowBurger] = useState(true);
   //let closeState: aDoorState 
-  const memoizedClosed: aDoorState = useMemo(()=> {const closeState = { state: "closed", image: closedDoor }; return closeState}, [])
-  
+  const memoizedClosed: aDoorState = useMemo(() => { const closeState = { state: "closed", image: closedDoor }; return closeState }, [])
+
   const openState: aDoorState = { state: "open", image: openDoor }
   const winState: aDoorState = { state: "win", image: winDoor }
   const goatState: aDoorState = { state: "goat", image: goatDoor }
@@ -212,18 +212,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div ><h1 className="icon-link m-3"  onClick={handleBurger}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" className="bi bi-menu-button-wide  d-block d-sm-block d-md-none" viewBox="0 0 16 16">
-  <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
-  <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-</svg>
-          </h1>
-          {showBurger &&<section className="d-flex justify-content-evenly flex-wrap flex-sm-wrap flex-md-nowrap">
+      <div ><h1 className="icon-link m-3" onClick={handleBurger}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" className="bi bi-menu-button-wide  d-block d-sm-block d-md-none" viewBox="0 0 16 16">
+          <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z" />
+          <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+        </svg>
+      </h1>
+        {showBurger && <section className="d-flex justify-content-evenly flex-wrap flex-sm-wrap flex-md-nowrap">
           <button className='btn btn-success mx-md-5 mx-3 my-1 w-100 w-md-25' onClick={onClickWinners}>Show previous winners</button>
           <button className='btn btn-success mx-md-5 mx-3 my-1 w-100 w-md-25' onClick={onClickContract}>How do contracts Work</button>
           <button className='btn btn-success mx-md-5 mx-3 my-1 w-100 w-md-25' onClick={onClickThis}>Contract Details</button>
-          
-          
+
+
         </section>}
       </div>
       <main className="bquest-main m-3 p-3  ">
@@ -231,6 +231,20 @@ export default function Home() {
           <h1 className="text-center">Hashes for Cashers</h1>
 
         </header>
+        <section>
+          {showWinners && <div className='text-center m-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3'>
+            <h2>Previous Winners</h2>
+            <table>
+              <thead><tr><td>Date</td><td>BlockHeight</td><td>Guesses Made</td><td>Winnings</td></tr></thead>
+              <tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody>
+            </table>
+          </div>
+          }
+          {showThis && <ThisContract onCloseThisContract={handleCloseThisContract}></ThisContract>}
+          {showContract && <SmartContracts onCloseSmartContracts={handleCloseSmartContracts}></SmartContracts>
+          }
+
+        </section>
         <section className="w-100 w-md-100 d-flex flex-wrap  justify-content-between">
 
           {showGame && <>
@@ -258,8 +272,7 @@ export default function Home() {
               <h3>Good luck</h3>
             </section>
             <section className=" ml-5 ">
-            {/* <HashesWallet onEnoughChange={handleEnoughToggleChange}></HashesWallet> */}
-            <HashesWallet onEnoughChange={memoizedCallBack}></HashesWallet>
+              <HashesWallet onEnoughChange={memoizedCallBack}></HashesWallet>
             </section>
             <br />
 
@@ -292,20 +305,7 @@ export default function Home() {
 
           </>
           }
-          <section>
-            {showWinners && <div className='text-center m-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3'>
-              <h2>Previous Winners</h2>
-              <table>
-                <thead><tr><td>Date</td><td>BlockHeight</td><td>Guesses Made</td><td>Winnings</td></tr></thead>
-                <tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody>
-              </table>
-            </div>
-            }
-            {showThis && <ThisContract onCloseThisContract={handleCloseThisContract}></ThisContract>}
-            {showContract && <SmartContracts onCloseSmartContracts={handleCloseSmartContracts}></SmartContracts>
-            }
 
-          </section>
 
 
         </section>
